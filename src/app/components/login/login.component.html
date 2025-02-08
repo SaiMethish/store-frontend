@@ -1,0 +1,15 @@
+<div class="login">
+    <div class="side-image">
+        <img src="../../../assets/project-images/Side Image1.png">
+    </div>
+    <div class="right-content" [formGroup]="loginForm">
+        <p style="font-size: 36px; font-weight: bold; letter-spacing: 0px; font-family: 'Inter';">Log in to Exclusive</p>
+        <p style="font-size: 16px; font-weight: normal; margin-top: 2%; font-family: 'Poppins';">Enter your details below</p>
+        <div class="inputs" [formGroup]="loginForm">
+            <input type="email" placeholder="Email" formControlName="email">
+            <input type="password" placeholder="Password" formControlName="password">
+        </div>
+        <button class="create-account" (click)="login()">Log in</button>
+        <p style="font-size: 16px; margin-top: 5%; font-family:'Poppins';">Don't have an account? <a style="border-bottom: 1px solid black; color: gray; cursor: pointer; text-decoration: none;" [routerLink]="['../register']">Sign up</a></p>
+    </div>
+    </div>

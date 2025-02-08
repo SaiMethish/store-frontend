@@ -1,0 +1,18 @@
+<div class="register">
+    <div class="side-image">
+        <img src="../../../assets/project-images/Side Image1.png">
+    </div>
+    <div class="right-content">
+        <p style=" font-family: 'Inter'; font-size: 36px; font-weight: bold; line-height: 30px; letter-spacing: 4%;">Create an account</p>
+        <p style="font-family: 'Poppins'; font-size: 16px; font-weight: normal; margin-top: 1%; margin-bottom: 0;">Enter your details below</p>
+        <div class="inputs" [formGroup]="registerForm">
+            <input type="text" placeholder="Firstname" formControlName="firstname">
+            <input type="text" placeholder="LastName" formControlName="lastname">
+            <input type="email" placeholder="Email" formControlName="email">
+            <input type="password" placeholder="Password" formControlName="password">
+            
+        </div>
+        <button class="create-account" (click)="signup()">Create Account</button>
+        <p style="font-size: 16px; margin-top: 5%; font-family: 'Poppins';">Already have account? <a style="border-bottom: 1px solid black; color: gray; cursor: pointer; text-decoration: none;" routerLink="/login">Log in</a></p>
+    </div>
+    </div>
