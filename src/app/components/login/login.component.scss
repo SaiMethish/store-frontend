@@ -1,9 +1,10 @@
 .login{
     display: flex;
-    height: 70%;
+    height: 80%;
+    margin-top: 5%;
     .side-image{
         height: 80%;
-        width: 48%;
+        width: 50%;
         img{
             height: auto;
             width: 95%;
@@ -12,7 +13,7 @@
     .right-content{
         display: flex;
         flex-direction: column;
-        margin-top: 9%;
+        margin-top: 10%;
         margin-left: 6%;
         height: 100%;
         width: 40%;

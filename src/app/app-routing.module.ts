@@ -5,6 +5,8 @@ import { LoginComponent } from './components/login/login.component';
 import { Page404Component } from './components/reusables/page404.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
+import { ProductPageComponent } from './components/product-page/product-page.component';
+import { productResolver } from './service/product.resolver';
 
 const routes: Routes = [
   {
@@ -13,7 +15,7 @@ const routes: Routes = [
   {
     path:'home',
     component:DashboardComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
   },
   {
     path:'register',
@@ -24,10 +26,14 @@ const routes: Routes = [
     component:LoginComponent
   },
   {
-    path:'**',
-    component:Page404Component
+    path:'home/product/:id',
+    component:ProductPageComponent,
+    resolve:{product:productResolver}
   },
-  
+  {
+      path:'**',
+      component:Page404Component
+    }
 ];
 
 @NgModule({

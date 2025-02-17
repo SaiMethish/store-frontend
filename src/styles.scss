@@ -1,5 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
 @import 'primeflex/primeflex.scss';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
 
 html,body{padding: 0; margin: 0;border: 0; box-sizing: border-box;}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+// ::-webkit-scrollbar {
+//     width: 10px;
+// }
+
+// ::-webkit-scrollbar-track {
+//     background-color: #f1f1f1;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background-color: #888;
+//     border-radius: 6px;
+//     border: 2px solid #f1f1f1;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//     background-color: #555;
+// }

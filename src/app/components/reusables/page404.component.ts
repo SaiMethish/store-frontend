@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
     <p>Your visited page not found. You may go home page.</p>
     <button routerLink="/">Back to home page</button>
   </div>
-  <app-paginator></app-paginator>
   `,
   styles: [
     `

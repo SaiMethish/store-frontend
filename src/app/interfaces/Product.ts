@@ -6,8 +6,8 @@ export interface Product{
     description:string,
     unitPrice:number,
     imageUrl:string,
-    isActive:boolean,
-    unitsIntStock:number,
+    isActive:number,
+    unitsInStock:number,
     category:string,
     reviews:Review[]
 }

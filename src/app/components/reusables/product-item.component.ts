@@ -7,7 +7,7 @@ import { Product } from 'src/app/interfaces/Product';
   <div class="card">
     <div class="card-image">
       <div  class=" wishlist-icon position-absolute"><p [ngClass]="{'pi-heart-fill wishlist-red':toggle,'pi-heart':!toggle}"  class="pi " (click)="addToWishList(product,$event)"></p></div>
-      <div  class=" view-icon position-absolute"><p class="pi pi-eye "></p></div>
+      <div  class=" view-icon position-absolute"><p class="pi pi-eye " [routerLink]="['product',product.id]"  ></p></div>
     <img [src]="product.imageUrl" class="card-img-top" >
     </div>
   <div class="card-body">
@@ -67,6 +67,8 @@ export class ProductItemComponent {
   avgRating!: number;
 
   @Input() product: any;
+
+  
 
   toggle:boolean=false;
 

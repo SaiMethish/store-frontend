@@ -4,13 +4,13 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-rating',
   template: `
 
-    <div class="row">
+    <div class="flex flex-row gap-2 align-items-center">
     <p class="pi pi-star-fill col-auto" [ngClass]="{'fill':tmpArray[0]}"></p>
     <p class="pi pi-star-fill col-auto" [ngClass]="{'fill':tmpArray[1]}"></p>
     <p class="pi pi-star-fill col-auto" [ngClass]="{'fill':tmpArray[2]}"></p>
     <p class="pi pi-star-fill col-auto" [ngClass]="{'fill':tmpArray[3]}"></p>
     <p class="pi pi-star-fill col-auto" [ngClass]="{'fill':tmpArray[4]}"></p>
-    <p class="col-auto"> ( {{reviews.length}} ) </p>
+    <p class="col-auto ml-2" style="font-family:'Poppins';"> ( {{reviews.length}} Reviews ) </p>
     </div>
   
   `,

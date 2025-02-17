@@ -1,8 +1,12 @@
 .navbar {
-    height: 40%;
+    height: 15%;
     border-bottom: 1px solid gainsboro;
     font-family: "Poppins";
-
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    overflow: hidden;
     .navbar-brand {
         font-family: "Inter";
         font-weight: bold;
@@ -124,4 +128,13 @@
         margin-left: 20px;
     }
 
+}
+
+.navbar {
+    overflow: auto;
+    scrollbar-width: none; /* For Firefox */
+}
+
+.navbar::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
 }

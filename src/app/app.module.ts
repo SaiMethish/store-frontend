@@ -19,7 +19,10 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductItemComponent } from './components/reusables/product-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingComponent } from './components/reusables/rating.component';
-import { PaginatorComponent } from './components/reusables/paginator.component'
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ProductPageComponent } from './components/product-page/product-page.component';
+import { ReviewComponent } from './components/reusables/review.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,8 @@ import { PaginatorComponent } from './components/reusables/paginator.component'
     ProductListComponent,
     ProductItemComponent,
     RatingComponent,
-    PaginatorComponent
+    ProductPageComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import { PaginatorComponent } from './components/reusables/paginator.component'
     ReactiveFormsModule,
     ButtonModule,
     MenuModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
   providers: [
     {

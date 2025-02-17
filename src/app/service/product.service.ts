@@ -18,9 +18,15 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/get`);
   }
 
-  checkStock=(val:string):boolean=>{
-    if(val=="Low Stock" || val=="In Stock") return true;
-    return false;
+
+  getProductById=(id:number)=>{
+    return this.http.get(`${this.baseUrl}/product/${id}`);
+  }
+
+  checkStock=(val:string):number=>{
+    if(val=="Low Stock") return 1;
+    if(val=="In Stock") return 2;
+    return 0;
   }
 
   populateData = () => {
@@ -35,7 +41,7 @@ export class ProductService {
             imageUrl: i.images[0],
             name: i.title,
             unitPrice: i.price * 75,
-            unitsIntStock: i.stock,
+            unitsInStock: i.stock,
             isActive: this.checkStock(i.availabilityStatus),
             category: i.category,
             sku: i.sku,
