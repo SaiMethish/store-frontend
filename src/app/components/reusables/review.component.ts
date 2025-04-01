@@ -73,7 +73,7 @@ import { Component, Input } from '@angular/core';
     align-items:center;
     background-color:#26A541;
     width:17%;
-    font-size:1.3rem;
+    font-size:1.1rem;
     font-weight:bold;
     font-family:"Inter";
     height:5vh;
@@ -106,7 +106,7 @@ import { Component, Input } from '@angular/core';
     #text{
       margin-top:3%;
       font-family:"Poppins";
-      font-size:1.3rem;
+      font-size:1rem;
     }
   }
   

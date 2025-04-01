@@ -1,4 +1,4 @@
-<nav class="navbar d-flex flex-row w-100 pt-5">
+<nav class="navbar d-flex flex-row w-100 pt-5" style="position: relative;">
     <div class="container-fluid w-100 h-100 ">
         <a href="#" class="  navbar-brand pt-2" style="width: 6%; margin-left: 6%;">Exclusive</a>
         <div class=" navbar-nav d-flex flex-row justify-content-evenly gap-2 pt-2" style="width: 30%; margin-left: 4%;">
@@ -15,7 +15,7 @@
         </div>
         <div class="navbar-nav d-flex flex-row gap-6 pt-3 mr-7" style="width: 12%; font-size: 1.8rem; font-weight: bold;" *ngIf="authService.isLoggedIn|async">
             <p class="nav-item  pi pi-heart"></p>
-            <p class="nav-item   pi pi-shopping-cart" ></p>
+            <p style="position: relative;" class="nav-item   pi pi-shopping-cart" ><span #cartCount style="position: absolute; top: -20%;left: 110%;  font-size: 15px">1</span></p>
             <p
             [ngClass]="{'user-icon':!isAccountClicked,'popup':isAccountClicked}" (click)="togglePopup()"
              class="nav-item  pi pi-user "></p>
@@ -23,23 +23,23 @@
         <!-- <div *ngIf="authService.isLoggedIn|async" class="user-icon"
             [ngClass]="{'user-icon':!isAccountClicked,'popup':isAccountClicked}" (click)="togglePopup()">
         </div> -->
-        <div class="popup-menu" *ngIf="accountClicked|async">
-            <div class="menu-items" style="margin-top: 5px;">
-                <span class="pi pi-user"></span>
-                <p>My Account</p>
-            </div>
-            <div class="menu-items">
-                <span class="pi pi-shopping-bag"></span>
-                <p>My Order</p>
-            </div>
-            <div class="menu-items">
-                <span class="pi pi-star"></span>
-                <p>My Reviews</p>
-            </div>
-            <div class="menu-items" (click)="logout()" >
-                <span class="pi pi-sign-out"></span>
-                <p>Logout</p>
-            </div>
-        </div>
     </div>
 </nav>
+<div class="popup-menu" *ngIf="accountClicked|async">
+    <div class="menu-items" (click)="iconRouting('myaccount')" style="margin-top: 5px;">
+        <span class="pi pi-user"></span>
+        <p>My Account</p>
+    </div>
+    <div class="menu-items" (click)="iconRouting('orders')">
+        <span class="pi pi-shopping-bag"></span>
+        <p>My Order</p>
+    </div>
+    <div class="menu-items" (click)="iconRouting('reviews')" >
+        <span class="pi pi-star"></span>
+        <p>My Reviews</p>
+    </div>
+    <div class="menu-items" (click)="logout()" >
+        <span class="pi pi-sign-out"></span>
+        <p>Logout</p>
+    </div>
+</div>

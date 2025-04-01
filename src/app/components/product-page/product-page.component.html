@@ -1,4 +1,4 @@
-<div class="container flex flex-row " style="width: 100%; height: 90%; margin-top: 9%;">
+<div class="container flex flex-row " style="width: 100%; height: 90%; margin-top: 3%;">
     <div class="section-1 flex flex-column" style="width: 10%; ">
         <div class="img-container row-auto">
             <img  [src]="product.imageUrl">
@@ -34,7 +34,7 @@
         <div class="buttons flex flex-row align-content-center justify-content-between">
             <button class="btn flex flex-row align-items-center col-auto" style="background-color:coral">
                 <p class="bi bi-bag-fill"></p>
-                <p id="btnText">Add To Cart</p>
+                <p id="btnText" (click)="addToCart()">Add To Cart</p>
             </button>
             <button class="btn flex flex-row col-auto" style="background-color: #DB4444">
                 <p class="bi bi-heart-fill"></p>

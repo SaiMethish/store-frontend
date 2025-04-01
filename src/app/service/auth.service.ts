@@ -45,4 +45,5 @@ export class AuthService {
     const token = sessionStorage.getItem("access-token");
     return !!token;
   }
+
 }

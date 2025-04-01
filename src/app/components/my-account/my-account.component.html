@@ -1,0 +1,36 @@
+<p class="welcome-text">Welcome! methish</p>
+<div class="profile-page" [formGroup]="userForm">
+    <p style="margin-top: 3vh; margin-left: 5vh; color: #DB4444; font-weight: bold; font-size: large;">Edit Your Profile</p>
+    <div class="top-section">
+        <div class="section-div">
+            <div class="input-div">
+                <label>First Name</label>
+                <input formControlName="firstName" type="text">
+            </div>
+            <div class="input-div">
+                <label>Last Name</label>
+                <input formControlName="lastName" type="text">
+            </div>
+        </div>
+        <div class="section-div">
+            <div class="input-div">
+                <label>Email</label>
+                <input formControlName="email" type="text">
+            </div>
+            <div class="input-div">
+                <label>Address</label>
+                <input formControlName="address" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="password-section">
+        <label>Password Changes</label>
+        <input formControlName="oldPassword" type="password" placeholder="Current Password">
+        <input formControlName="newPassword" type="password" placeholder="New Password">
+        <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+    </div>
+    <div class="button-section">
+        <button class="btn btn-outlined">Cancel</button>
+        <button class="btn" style="background-color: #DB4444; color: #ffffff;" (click)="updateDetails()">Update</button>
+    </div>
+</div>

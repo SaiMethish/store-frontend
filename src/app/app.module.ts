@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/sign-up/sign-up.component';
@@ -22,6 +21,8 @@ import { RatingComponent } from './components/reusables/rating.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { ReviewComponent } from './components/reusables/review.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ReviewComponent } from './components/reusables/review.component';
     RatingComponent,
     ProductPageComponent,
     ReviewComponent,
+    MyAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,12 @@ import { ReviewComponent } from './components/reusables/review.component';
     ButtonModule,
     MenuModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [
     {

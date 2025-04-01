@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/service/cart.service';
 import { ProductService } from 'src/app/service/product.service';
+import { SharedService } from 'src/app/service/shared.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-page',
@@ -8,21 +11,18 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent implements OnInit,AfterViewInit {
-  constructor(private route:ActivatedRoute, private productService:ProductService,
-    private renderer:Renderer2){}
+  constructor(private route:ActivatedRoute, private sharedService:SharedService,
+    private renderer:Renderer2, private cartService:CartService, private toastr:ToastrService){}
   product:any;
   @ViewChild('productStatus') productStatus!:ElementRef;
 
   ngOnInit(){
     this.route.data.subscribe((i:any)=>{
       this.product=i.product;
-    })
-    console.log(this.product);
-    
+    })    
   }
   ngAfterViewInit(): void {
       let pText:string=this.productStatus.nativeElement.innerText;
-      console.log(pText);
       if(pText=='Low On Stock'){
         this.renderer.setStyle(this.productStatus.nativeElement,'color','orange');
       }
@@ -40,6 +40,26 @@ export class ProductPageComponent implements OnInit,AfterViewInit {
 
   formatToINR(number:number) {
     return number.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+  }
+
+  addToCart(){
+    this.cartService.addToCart(this.product.id,1).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.toastr.success(res.message,'success');
+        this.cartService.getCart().subscribe({
+          next:(res:any)=>{
+            this.sharedService.setUserCart(res.cartItems);
+          },
+          error:(err:any)=>{
+            console.error(err);
+          }
+        })
+      },
+      error:(err:any)=>{
+        console.error(err);
+      }
+    })
   }
 
 }

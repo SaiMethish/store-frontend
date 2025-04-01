@@ -7,6 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { productResolver } from './service/product.resolver';
+import { MyAccountComponent } from './components/my-account/my-account.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,13 @@ const routes: Routes = [
   {
     path:'home/product/:id',
     component:ProductPageComponent,
+    canActivate:[AuthGuard],
     resolve:{product:productResolver}
+  },
+  {
+    path:'myaccount',
+    component:MyAccountComponent,
+    canActivate:[AuthGuard]
   },
   {
       path:'**',

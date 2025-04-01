@@ -45,7 +45,7 @@ export class LoginComponent {
         sessionStorage.setItem("expiration-time",res.expirationTime.accessToken);
         this.requestTokenCall();
         this.authService.changeStatus(true);
-        this.router.navigate(['home']);
+        this.router.navigate(['home']); 
       },
       error:(err:any)=>{
         console.log(err);
