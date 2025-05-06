@@ -1,0 +1,229 @@
+
+
+/* Cart Layout */
+.cart-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%; /* Increased width for better layout */
+  margin: auto;
+  align-items: flex-start;
+  padding-top: 5px;
+}
+
+/* Shopping Cart Section */
+.cart-details {
+  width: 75%; /* Increased width */
+  padding: 10px 20px 20px 20px;
+}
+
+/* Title Styling */
+.cart-title, .cart-total h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Table Styling */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header Row */
+.cart-table thead {
+  display: block;
+  background-color: white;
+}
+
+thead tr {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px; /* Added margin to separate th from tbody */
+}
+
+thead th {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 15px;
+  text-align: left;
+  flex: 1;
+}
+
+/* Scrollable Table Body */
+.cart-table tbody {
+  display: block;
+  max-height: 280px; /* Height for 4 rows */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Custom Scrollbar for Chrome */
+.cart-table tbody::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cart-table tbody::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 5px;
+}
+
+/* Table Rows */
+.cart-table tbody tr {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #fff;
+}
+
+/* Column Sizing */
+thead th,
+.cart-table tbody tr td {
+  flex: 1;
+  padding: 10px;
+}
+
+/* Product Layout */
+.product {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product img {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+/* Quantity Input */
+.quantity {
+  width: 50px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Cart Buttons */
+.cart-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btn-outline {
+  padding: 10px 15px;
+  border: 1px solid lightgray;
+  background: white;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.btn-outline:hover {
+  background: black;
+  color: white;
+}
+
+/* Cart Total Section */
+.cart-total {
+  width: 25%; /* Adjusted width to fit better */
+  border: 1px solid #ddd;
+  margin: 5% 0% 0px 0%;
+  border-radius: 8px;
+  padding: 20px;
+  background: #fff;
+}
+
+/* Total Rows */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.total-bold {
+  font-weight: 600;
+  border-bottom: none;
+}
+
+/* Checkout Button */
+.checkout-btn {
+  width: 100%;
+  background: #d9534f;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.checkout-btn:hover {
+  background: #c9302c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .cart-details, .cart-total {
+      width: 100%;
+  }
+}
+
+.empty-cart-page{
+  text-align: center;
+  margin-top: 1%;
+  .empty-cart-image{
+    padding: 1% 0 1% 0;
+    //margin: 10% 0 10% 0;
+    border: 4px solid #7727ad;
+    border-radius: 55%;
+    width: 15%;
+    height: 8%;
+    margin: auto auto;
+    h1{
+      font-size: 400%;
+      padding-left: 2%;
+      padding-right: 2%;
+      color: #7727ad;
+      //font-size:xx-large;
+    }
+  }
+  h3{
+    padding: 1% 0 1% 0;
+  }
+  p{
+    font-family: "Poppins";
+    font-size:large;
+  }
+  button{
+    font-family: "Poppins";
+    padding: 1% 2% 1% 2%;
+    font-size: larger;
+    background-color: #7727ad;
+    color: white;
+  }
+}
+

@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { CartService } from 'src/app/service/cart.service';
 import { SharedService } from 'src/app/service/shared.service';
+import { WishlistService } from 'src/app/service/wishlist.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { SharedService } from 'src/app/service/shared.service';
 })
 export class NavbarComponent implements OnInit, AfterViewChecked {
   constructor(private cartService: CartService, private router: Router, public authService: AuthService,
-    private sharedService: SharedService, private renderer: Renderer2
+    private sharedService: SharedService, private renderer: Renderer2, private wishlistService: WishlistService
   ) { }
   ngAfterViewChecked(): void {
     if (this.authService.checkLoginStatus()) {
@@ -39,9 +40,20 @@ export class NavbarComponent implements OnInit, AfterViewChecked {
         }
       })
     }
+    this.wishlistService.getWishlist().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.wishlistCount = res.items.length;
+      },
+      error: (err: any) => {
+        console.log(err);
+      }
+    })
   }
   accountClicked = new BehaviorSubject<boolean>(false);
   isAccountClicked: boolean = false;
+  wishlistCount!: number;
+  searchinputVal: string = "";
 
   togglePopup = () => {
     this.accountClicked.next(!this.isAccountClicked)
@@ -57,8 +69,24 @@ export class NavbarComponent implements OnInit, AfterViewChecked {
     this.router.navigate(['login']);
   }
 
-  iconRouting=(arg:string)=>{
+  iconRouting = (arg: string) => {
     this.accountClicked.next(false);
     this.router.navigate([arg]);
   }
+  inputHandler = () => {
+    this.sharedService.searchText.next(this.searchinputVal);
+  };
+
+  debounceFn(fn: any, delay: any) {
+    let timer: any;
+    return (...args: any) => {
+      clearTimeout(timer); 
+      timer = setTimeout(() => {
+        fn(args); 
+      }, delay);
+    };
+  }
+
+  debounce = this.debounceFn(this.inputHandler, 2000);
+
 }

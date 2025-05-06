@@ -1,0 +1,43 @@
+.wishlist-item-container {
+    margin-top: 2%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Always display 4 items per row */
+    gap: 16px; /* Space between items */
+  }
+
+  .empty-wishlist{
+        text-align: center;
+        margin-top: 1%;
+        height: 80%;
+        .empty-cart-image{
+          padding: 1% 0 1% 0;
+          //margin: 10% 0 10% 0;
+          border: 4px solid #ad2727;
+          border-radius: 55%;
+          width: 15%;
+          height: 8%;
+          margin: auto auto;
+          h1{
+            font-size: 400%;
+            padding-left: 2%;
+            padding-right: 2%;
+            color: #ad2727;
+            //font-size:xx-large;
+          }
+        }
+        h3{
+          padding: 1% 0 1% 0;
+        }
+        p{
+          font-family: "Poppins";
+          font-size:large;
+        }
+        button{
+          font-family: "Poppins";
+          padding: 1% 2% 1% 2%;
+          font-size: larger;
+          background-color: #ad2727;
+          color: white;
+        }
+      }

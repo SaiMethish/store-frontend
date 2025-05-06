@@ -8,6 +8,10 @@ import { AuthGuard } from './guard/auth.guard';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { productResolver } from './service/product.resolver';
 import { MyAccountComponent } from './components/my-account/my-account.component';
+import { CartComponent } from './components/cart/cart.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { MyordersComponent } from './components/myorders/myorders.component';
 
 const routes: Routes = [
   {
@@ -38,9 +42,29 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path:'mycart',
+    component:CartComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'wishlist',
+    component:WishlistComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'checkout',
+    component:CheckoutComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:"myorder",
+    component:MyordersComponent
+  },
+  {
       path:'**',
       component:Page404Component
-    }
+    },
+    
 ];
 
 @NgModule({

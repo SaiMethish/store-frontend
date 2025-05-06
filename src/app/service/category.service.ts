@@ -8,10 +8,14 @@ export class CategoryService {
 
   constructor(private http:HttpClient) { }
 
-  baseUrl="http://localhost:8080/api/category/getAll";
+  baseUrl="http://localhost:8080/api/category";
 
   getAllCategories=()=>{
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}/getAll`);
+  }
+
+  getProductByCategory=(categoryName:string)=>{
+    return this.http.get(`${this.baseUrl}/category/${categoryName}`);
   }
 
 }

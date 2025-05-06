@@ -1,0 +1,71 @@
+<h3 style="margin-top: 2%; margin-left: 6.6%; font-family: 'Inter',sans-serif;">Billing Details</h3>
+<div class="checkout-container" [formGroup]="billingForm">
+    <div class="left-content">
+        <div class="formItem">
+            <label>First Name</label>
+            <input type="text" formControlName="firstName">
+        </div>
+        <div class="formItem">
+            <label>Last Name</label>
+            <input type="text" formControlName="lastName">
+        </div>
+        <div class="formItem">
+            <label>Email</label>
+            <input type="email" formControlName="email">
+        </div>
+        <div class="formItem">
+            <label>Street</label>
+            <input type="text" formControlName="street">
+        </div>
+        <div class="formItem">
+            <label>City</label>
+            <input type="text" formControlName="city">
+        </div>
+        <div class="formItem">
+            <label>State</label>
+            <input type="text" formControlName="state">
+        </div>
+        <div class="formItem">
+            <label>Country</label>
+            <input type="text" formControlName="country">
+        </div>
+        <div class="formItem">
+            <label>ZipCode</label>
+            <input type="text" formControlName="zipCode">
+        </div>
+    </div>
+    <div class="right-content">
+        <div class="items-div">
+            <ng-container *ngFor="let item of cart">
+                <div class="item">
+                    <img [src]="item.imageUrl">
+                    <p class="name">{{item.productName}}</p>
+                    <p class="price">{{sharedService.formatToINR(item.totalPrice)}}</p>
+                </div>
+            </ng-container>
+        </div>
+        <div class="subtotal">
+            <p>Subtotal: </p>
+            <p *ngIf="totalPrice">{{sharedService.formatToINR(totalPrice)}}</p>
+        </div>
+        <div class="shipping">
+            <p>Shipping: </p>
+            <p>Free</p>
+        </div>
+        <div class="total">
+            <p>Total: </p>
+            <p *ngIf="totalPrice">{{sharedService.formatToINR(totalPrice)}}</p>
+        </div>
+        <div class="checkboxes">
+            <div class="checkbox-div">
+                <input type="radio" value="Online" name="payment" formControlName="payment">
+                <label>Online</label>
+            </div>
+            <div class="checkbox-div">
+                <input type="radio" value="Cash on delivery" name="payment" formControlName="payment">
+                <label>Cash on delivery</label>
+            </div>
+        </div>
+        <button class="btn" (click)="placeOrder()" >Place Order</button>
+    </div>
+</div>

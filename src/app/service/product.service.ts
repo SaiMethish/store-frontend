@@ -10,7 +10,54 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   baseUrl = "http://localhost:8080/api/products";
-
+  categoryMap=new Map<string,string[]>();
+  categories = [
+    "beauty",
+    "fragrances",
+    "furniture",
+    "groceries",
+    "home-decoration",
+    "kitchen-accessories",
+    "laptops",
+    "mens-shirts",
+    "mens-shoes",
+    "mens-watches",
+    "mobile-accessories",
+    "motorcycle",
+    "skin-care",
+    "smartphones",
+    "sports-accessories",
+    "sunglasses",
+    "tablets",
+    "tops",
+    "vehicle",
+    "womens-bags",
+    "womens-dresses",
+    "womens-jewellery",
+    "womens-shoes",
+    "womens-watches"
+  ];
+  setCategories=()=>{
+    this.categoryMap.set("fashion",[]);
+    this.categoryMap.set("furniture",[]);
+    this.categoryMap.set("beauty",[]);
+    this.categoryMap.set("electronics",[]);
+    this.categoryMap.set("groceries",[]);
+    this.categoryMap.set("home appliances",[]);
+    for(let i of this.categories){
+      if(i=="beauty"||i=="furniture"||i=="groceries") this.categoryMap.get(i)?.push(i);
+      else if(i.includes("womens")||i.includes("mens")||i.includes("tops")||i.includes("sports")
+      || (i.includes("sunglasses"))){
+    this.categoryMap.get("fashion")?.push(i);
+      }
+      else if(i.includes("laptops")||i.includes("watches")||i.includes("smartphones")||i.includes("tablets")||i.includes("motorcycle")||i.includes("vehicle")||i.includes("mobile")){
+        this.categoryMap.get("electronics")?.push(i);
+      }
+      else if(i.includes("kitchen")||i.includes("home")) this.categoryMap.get("home applicances")?.push(i);
+      else if(i.includes("skin-care")||i.includes("fragrances")) this.categoryMap.get("beauty")?.push(i);
+    }
+    return this.categoryMap;
+  }
   getAllProducts = () => {
     const headers = new HttpHeaders({
       'Authorization': "Bearer " + sessionStorage.getItem("access-token")

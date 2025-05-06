@@ -17,4 +17,16 @@ export class CartService {
   addToCart=(productId:number, quantity:number)=>{
     return this.http.post(`${this.baseUrl}/add?productId=${productId}&quantity=${quantity}`,null);
   }
+
+  updateCart=(cartItemId:number,quantity:number)=>{
+    return this.http.put(`${this.baseUrl}/update?cartItemId=${cartItemId}&quantity=${quantity}`,null);
+  }
+
+  removeFromCart=(cartItemId:number)=>{
+    return this.http.delete(`${this.baseUrl}/remove?cartItemId=${cartItemId}`);
+  }
+
+  clearCart=()=>{
+    return this.http.delete(`${this.baseUrl}/clear`);
+  }
 }

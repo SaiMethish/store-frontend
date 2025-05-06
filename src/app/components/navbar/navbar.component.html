@@ -10,14 +10,13 @@
         <div
         class=" nav-item pt-2" style="width: 21%; margin-right: 2%;"
             [ngClass]="{'search-bar-changed':!(authService.isLoggedIn|async),'search-bar':authService.isLoggedIn|async}">
-            <input placeholder="What are you looking for?" type="text">
+            <input placeholder="What are you looking for?" [(ngModel)]="searchinputVal" (ngModelChange)="debounce()" type="text">
             <span class="pi pi-search h5" style="font-size: 20px;"></span>
         </div>
         <div class="navbar-nav d-flex flex-row gap-6 pt-3 mr-7" style="width: 12%; font-size: 1.8rem; font-weight: bold;" *ngIf="authService.isLoggedIn|async">
-            <p class="nav-item  pi pi-heart"></p>
-            <p style="position: relative;" class="nav-item   pi pi-shopping-cart" ><span #cartCount style="position: absolute; top: -20%;left: 110%;  font-size: 15px">1</span></p>
-            <p
-            [ngClass]="{'user-icon':!isAccountClicked,'popup':isAccountClicked}" (click)="togglePopup()"
+            <p class="nav-item  pi pi-heart"(click)="iconRouting('wishlist')"><span  style="position: absolute; top: -20%;left: 80%;  font-size: 15px">1</span></p>
+            <p style="position: relative;" class="nav-item   pi pi-shopping-cart" (click)="iconRouting('mycart')" ><span #cartCount style="position: absolute; top: -20%;left: 110%;  font-size: 15px">1</span></p>
+            <p [ngClass]="{'user-icon':!isAccountClicked,'popup':isAccountClicked}" (click)="togglePopup()"
              class="nav-item  pi pi-user "></p>
         </div>
         <!-- <div *ngIf="authService.isLoggedIn|async" class="user-icon"
@@ -30,7 +29,7 @@
         <span class="pi pi-user"></span>
         <p>My Account</p>
     </div>
-    <div class="menu-items" (click)="iconRouting('orders')">
+    <div class="menu-items" (click)="iconRouting('myorder')">
         <span class="pi pi-shopping-bag"></span>
         <p>My Order</p>
     </div>

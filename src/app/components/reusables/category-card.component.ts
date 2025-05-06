@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
   selector: 'app-category-card',
   template: `
-  <div class="card">
+  <div class="card" (click)="categoryClick(category.categoryName)">
     <img [src]="category.imageUrl" class="card-img-top">
     <div class="card-body">
       <h6 class="card-title">{{category.categoryName}}</h6>
@@ -38,6 +39,13 @@ import { Component, Input, OnInit } from '@angular/core';
   ]
 })
 export class CategoryCardComponent {
+  constructor(private sharedService:SharedService){
+
+  }
+  categoryClick=(categoryName:string)=>{
+    this.sharedService.categoryFlag.next(true);
+    this.sharedService.categoryName.next(categoryName);
+  }
 
   @Input() category: any;
 

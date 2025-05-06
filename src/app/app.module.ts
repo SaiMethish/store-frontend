@@ -6,7 +6,7 @@ import { SignupComponent } from './components/sign-up/sign-up.component';
 import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Page404Component } from './components/reusables/page404.component';
 import { ButtonModule } from 'primeng/button';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -23,6 +23,13 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 import { ReviewComponent } from './components/reusables/review.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { ToastrModule } from 'ngx-toastr';
+import { CartComponent } from './components/cart/cart.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WishlistItemComponent } from './components/reusables/wishlist-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { MyordersComponent } from './components/myorders/myorders.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +47,12 @@ import { ToastrModule } from 'ngx-toastr';
     ProductPageComponent,
     ReviewComponent,
     MyAccountComponent,
+    CartComponent,
+    WishlistComponent,
+    WishlistItemComponent,
+    CheckoutComponent,
+    SearchPipe,
+    MyordersComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +61,9 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     ButtonModule,
     MenuModule,
+    BrowserAnimationsModule,
     NgbModule,
+    FormsModule,
     NgxPaginationModule,
     ToastrModule.forRoot({
       timeOut: 2000,

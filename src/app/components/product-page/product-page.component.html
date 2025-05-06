@@ -38,7 +38,7 @@
             </button>
             <button class="btn flex flex-row col-auto" style="background-color: #DB4444">
                 <p class="bi bi-heart-fill"></p>
-                <p id="btnText">Add To Wishlist</p>
+                <p id="btnText" (click)="addToWishlist(product.id)">Add To Wishlist</p>
             </button>
         </div>
         <app-review [reviews]="product.reviews"></app-review>

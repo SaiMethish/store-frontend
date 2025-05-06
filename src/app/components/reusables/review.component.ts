@@ -30,7 +30,6 @@ import { Component, Input } from '@angular/core';
     <p class="bi bi-hand-thumbs-down-fill ml-3 mr-1"></p>
   </div>
 </div>
-
     </ng-container>
     </div>
     </div>

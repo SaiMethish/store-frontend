@@ -1,0 +1,62 @@
+<div class="cart-container" >
+    <!-- Shopping Cart Table -->
+    <div class="cart-details">
+        <h3 class="cart-title">Cart ({{userCart.length}})</h3>
+        <table class="cart-table" *ngIf="userCart.length">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let cart of userCart">
+                <tr >
+                    <td (click)="this.router.navigate(['home/product',cart.productId])" style="cursor: pointer;" class="product">
+                        <img [src]="cart.imageUrl" [alt]="userCart.productName">
+                        <p>{{cart.productName}}</p>
+                    </td>
+                    <td>{{sharedService.formatToINR(cart.unitPrice)}}</td>
+                    <td><input type="number" class="quantity" #quantity (change)="updateCart($event,cart)" [value]="cart.quantity" min="0"></td>
+                    <td>{{sharedService.formatToINR(cart.totalPrice)}}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+        </table>
+        
+        <div class="cart-buttons" *ngIf="userCart.length">
+            <button class="btn-outline" [routerLink]="['/']">Return To Shop</button>
+            <button class="btn-outline" (click)="clearCart()">Clear Cart</button>
+        </div>
+    </div>
+
+    <!-- Cart Total Section -->
+    <div class="cart-total" *ngIf="userCart.length">
+        <h3>Cart Total</h3>
+        <div class="total-row">
+            <span>Subtotal:</span>
+            <span>{{sharedService.formatToINR(totalPrice)}}</span>
+        </div>
+        <div class="total-row">
+            <span>Shipping:</span>
+            <span>Free</span>
+        </div>
+        <div class="total-row total-bold">
+            <span>Total:</span>
+            <span>{{sharedService.formatToINR(totalPrice)}}</span>
+        </div>
+        <button class="checkout-btn" [routerLink]="['/checkout']" >Proceed to Checkout</button>
+    </div>
+</div>
+
+<!-- Empty cart page -->
+<div class="empty-cart-page" *ngIf="!userCart.length">
+    <div class="empty-cart-image">
+        <h1 class="bi bi-cart-fill" ></h1>
+    </div>
+    <h3>YOUR CART IS CURRENTLY EMPTY!</h3>
+    <p>Looks like you have not made your choice yet.</p>
+    <button class="btn " [routerLink]="['/']">Return to Shop</button>
+</div>

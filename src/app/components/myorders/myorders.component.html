@@ -1,0 +1,33 @@
+
+<h3 style="margin-left: 6.5%; margin-top: 2%;">My Orders</h3>
+
+<div class="order-container">
+    <div class="header">
+        <p>Order Id</p>
+        <p >Total Price</p>
+        <p>Status</p>
+        <p style="margin-right: 7%;">Order Date</p>
+    </div>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item" *ngFor="let order of orderList; let i = index">
+        <div class="accordion-header">
+          <div class="accordion-toggle" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i">
+            <p>{{order.orderTrackingNumber}}</p>
+            <p>{{sharedService.formatToINR(order.totalPrice)}}</p>
+            <p>{{order.status}}</p>
+            <p>{{order.dateCreated}}</p>
+          </div>
+        </div>
+        <div [id]="'collapse' + i" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <div class="accordion-body-div" *ngFor="let item of order.orderItems">
+              <img [src]="item.imageUrl" alt="{{item.productName}}">
+              <p>{{item.productName}}</p>
+              <p>{{sharedService.formatToINR(item.unitPrice)}}</p>
+              <p>Quantity: {{item.quantity}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

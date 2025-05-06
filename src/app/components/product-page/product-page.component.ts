@@ -4,6 +4,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { ProductService } from 'src/app/service/product.service';
 import { SharedService } from 'src/app/service/shared.service';
 import { ToastrService } from 'ngx-toastr';
+import { WishlistService } from 'src/app/service/wishlist.service';
 
 @Component({
   selector: 'app-product-page',
@@ -12,7 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductPageComponent implements OnInit,AfterViewInit {
   constructor(private route:ActivatedRoute, private sharedService:SharedService,
-    private renderer:Renderer2, private cartService:CartService, private toastr:ToastrService){}
+    private renderer:Renderer2, private cartService:CartService, private toastr:ToastrService,
+  private wishlistService:WishlistService){}
   product:any;
   @ViewChild('productStatus') productStatus!:ElementRef;
 
@@ -58,6 +60,19 @@ export class ProductPageComponent implements OnInit,AfterViewInit {
       },
       error:(err:any)=>{
         console.error(err);
+      }
+    })
+  }
+
+  addToWishlist(productId:number){
+    this.wishlistService.addItem(productId).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.toastr.success(res.message);
+      },
+      error:(err:any)=>{
+        console.error(err);
+        this.toastr.error(err.message);
       }
     })
   }
