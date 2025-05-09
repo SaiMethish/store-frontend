@@ -2,12 +2,12 @@
     height: 15%;
     border-bottom: 1px solid gainsboro;
     font-family: "Poppins";
-    //position: fixed;
-    position: relative;
-    //top: 0;
-    //z-index: 1000;
+    position: fixed;
+    //position: relative;
+    top: 0;
+    z-index: 1000;
     background-color: white;
-    overflow: hidden;
+    //overflow: hidden;
     .navbar-brand {
         font-family: "Inter";
         font-weight: bold;
@@ -67,11 +67,11 @@
 }
 
 .popup-menu {
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 10000;
     display: flex;
     flex-direction: column;
-    top: 14%;
+    top: 12%;
     left: 84%;
     box-shadow: 10px 10px 5px 0px transparent;
     background-color: #828282;

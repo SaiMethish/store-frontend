@@ -1,4 +1,4 @@
-<nav class="navbar d-flex flex-row w-100 pt-5" style="position: relative;">
+<nav class="navbar d-flex flex-row w-100 pt-3" id="navbar">
     <div class="container-fluid w-100 h-100 ">
         <a href="#" class="  navbar-brand pt-2" style="width: 6%; margin-left: 6%;">Exclusive</a>
         <div class=" navbar-nav d-flex flex-row justify-content-evenly gap-2 pt-2" style="width: 30%; margin-left: 4%;">
@@ -24,7 +24,7 @@
         </div> -->
     </div>
 </nav>
-<div class="popup-menu" *ngIf="accountClicked|async">
+<div class="popup-menu" id="popup-menu" *ngIf="accountClicked|async">
     <div class="menu-items" (click)="iconRouting('myaccount')" style="margin-top: 5px;">
         <span class="pi pi-user"></span>
         <p>My Account</p>
