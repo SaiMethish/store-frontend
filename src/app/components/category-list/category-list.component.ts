@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CategoryService } from 'src/app/service/category.service';
 import { SharedService } from 'src/app/service/shared.service';
 
@@ -9,7 +10,7 @@ import { SharedService } from 'src/app/service/shared.service';
 })
 export class CategoryListComponent implements OnInit {
 
-  constructor(private categoryService:CategoryService, private sharedService:SharedService ){}
+  constructor(private categoryService:CategoryService, private sharedService:SharedService, private spinner:NgxSpinnerService ){}
 
   categoryList:any[]=[];
 
@@ -22,6 +23,7 @@ export class CategoryListComponent implements OnInit {
     this.imageMap.set("furniture","../../../assets/project-images/furniture.jpg");
     this.imageMap.set("home appliances","../../../assets/project-images/home-appicances-category.jpg");
     this.categoryService.getAllCategories().subscribe((res: any) => {
+      this.spinner.show()
       const mappedCategories = res.filter((i: any) => {
         return this.imageMap.has(i.categoryName);
       }).map((i: any) => {

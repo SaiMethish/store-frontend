@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from 'src/app/service/wishlist.service';
 
@@ -10,7 +11,9 @@ import { WishlistService } from 'src/app/service/wishlist.service';
 export class WishlistComponent implements OnInit {
    
   myWishlist!:[]
-  constructor(private wishlistService:WishlistService, private toastr:ToastrService){}
+  constructor(private wishlistService:WishlistService, private toastr:ToastrService,
+    private spinner:NgxSpinnerService
+  ){}
 
   ngOnInit(){
     this.wishlistService.getWishlist().subscribe({
@@ -18,7 +21,8 @@ export class WishlistComponent implements OnInit {
         console.log(res);
         this.myWishlist=res.items;
       },
-      error:(err:any)=>{ console.error(err)}
+      error:(err:any)=>{ console.error(err)},
+      complete:()=>this.spinner.hide()
     })
   }
 
@@ -32,7 +36,8 @@ export class WishlistComponent implements OnInit {
       },
       error:(err:any)=>{
         this.toastr.error(err.error.message);
-      }
+      },
+      complete:()=>this.spinner.hide()
     })
   }
 

@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-5 mb-4" *ngFor="let product of productList|search:searchVal:searchbyCategoryFlag|paginate: { itemsPerPage: 12, currentPage: p }">
+    <div class="col-lg-3 col-md-3 col-sm-5 mb-4"
+      *ngFor="let product of productList|search:searchVal:searchbyCategoryFlag|paginate: { itemsPerPage: 12, currentPage: p, totalItems:totalElements }">
       <app-product-item [product]="product"></app-product-item>
     </div>
-    <pagination-controls style="text-align: center;" (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls  style="text-align: center;" (pageChange)="p=$event;getproducts()" [maxSize]="5"
+      [directionLinks]="true" [autoHide]="false"></pagination-controls>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="container flex flex-row " style="width: 100%; height: 90%; margin-top: 3%;">
+<div class="container flex flex-row " style="width: 100%; height: 90%; margin-top: 6%;">
     <div class="section-1 flex flex-column" style="width: 10%; ">
         <div class="img-container row-auto">
             <img  [src]="product.imageUrl">
@@ -41,6 +41,7 @@
                 <p id="btnText" (click)="addToWishlist(product.id)">Add To Wishlist</p>
             </button>
         </div>
-        <app-review [reviews]="product.reviews"></app-review>
+        <app-review *ngIf="!(sharedService.toAdd|async)" [reviews]="product.reviews"></app-review>
+        <app-add-review *ngIf="sharedService.toAdd|async" [productId]="product.id"></app-add-review>
     </div>
 </div>

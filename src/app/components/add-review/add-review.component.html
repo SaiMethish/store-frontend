@@ -1,0 +1,15 @@
+<div class="add-review-container">
+  <h4>Add Review</h4>
+  <div class="star-container">
+    <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+       class="bi"
+       [ngClass]="{'bi-star-fill': i < userRating, 'bi-star': i >= userRating}"
+       (click)="setRating(i + 1)">
+    </i>
+  </div>
+  <textarea placeholder="comments" [(ngModel)]="comments"></textarea>
+  <div class="button-container">
+    <button class="btn btn-danger" (click)="sharedService.toAdd.next(false)">Close</button>
+    <button class="btn btn-primary" (click)="submitReview()">Submit</button>
+  </div>
+</div>

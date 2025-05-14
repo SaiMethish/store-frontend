@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { CartService } from 'src/app/service/cart.service';
@@ -14,7 +15,8 @@ import { WishlistService } from 'src/app/service/wishlist.service';
 })
 export class NavbarComponent implements OnInit, AfterViewChecked {
   constructor(private cartService: CartService, private router: Router, public authService: AuthService,
-    private sharedService: SharedService, private renderer: Renderer2, private wishlistService: WishlistService
+    private sharedService: SharedService, private renderer: Renderer2, private wishlistService: WishlistService,
+    private spinner:NgxSpinnerService
   ) { }
   ngAfterViewChecked(): void {
     if (this.authService.checkLoginStatus()) {
@@ -31,13 +33,15 @@ export class NavbarComponent implements OnInit, AfterViewChecked {
       this.isAccountClicked = status;
     })
     if (this.authService.checkLoginStatus()) {
+      this.spinner.show()
       this.cartService.getCart().subscribe({
         next: (res: any) => {
           this.sharedService.setUserCart(res.cartItems);
         },
         error: (err: any) => {
           console.error(err);
-        }
+        },
+        // complete:()=>this.spinner.hide()
       })
     }
     this.wishlistService.getWishlist().subscribe({
@@ -47,7 +51,8 @@ export class NavbarComponent implements OnInit, AfterViewChecked {
       },
       error: (err: any) => {
         console.log(err);
-      }
+      },
+      complete:()=>this.spinner.hide()
     })
   }
   accountClicked = new BehaviorSubject<boolean>(false);

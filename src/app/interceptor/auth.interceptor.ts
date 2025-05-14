@@ -9,7 +9,9 @@ import {
 import { catchError, Observable, throwError, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
-import { switchMap, filter, take, tap } from 'rxjs/operators';
+import { switchMap, filter, take, tap, finalize } from 'rxjs/operators';
+import { SharedService } from '../service/shared.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -17,11 +19,19 @@ export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private router: Router, private inject: Injector, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private inject: Injector,
+    private authService: AuthService,
+    private sharedService: SharedService,
+    private spinner:NgxSpinnerService
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (request.url.includes("/login") || request.url.includes("/refresh")) {
-      return next.handle(request);
+    if (request.url.includes("/login") || request.url.includes("/refresh") || request.url.includes("/register")) {
+      return next.handle(request).pipe(
+        finalize(() => this.sharedService.spinnerFlag.next(false))
+      );
     }
 
     const accessToken = sessionStorage.getItem("access-token");
@@ -30,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
         Authorization: 'Bearer ' + accessToken,
       }
     });
-
+      //this.spinner.show();// Show loader
     return next.handle(clonedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 && !request.url.includes("/login")) {
@@ -39,7 +49,8 @@ export class AuthInterceptor implements HttpInterceptor {
         } else {
           return throwError(() => error);
         }
-      })
+      }),
+      //finalize(() => this.spinner.hide()) // Hide loader
     );
   }
 
@@ -52,8 +63,8 @@ export class AuthInterceptor implements HttpInterceptor {
         tap(token => console.log("New access token received")),
         switchMap((token: any) => {
           this.isRefreshing = false;
-          sessionStorage.setItem("refresh-token",token.refresh_token);
-          sessionStorage.setItem("access-token",token.access_token);
+          sessionStorage.setItem("refresh-token", token.refresh_token);
+          sessionStorage.setItem("access-token", token.access_token);
           this.refreshTokenSubject.next(token.access_token);  
           return next.handle(this.addToken(request, token.access_token));
         }),
@@ -62,7 +73,8 @@ export class AuthInterceptor implements HttpInterceptor {
           this.authService.logoutApi();
           console.log("Failed to refresh token");
           return throwError(() => err);
-        })
+        }),
+        //finalize(() => this.spinner.hide()) // Hide loader in case of error
       );
     } else {
       return this.refreshTokenSubject.pipe(

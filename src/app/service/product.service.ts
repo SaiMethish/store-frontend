@@ -1,15 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/Product';
+import { SharedService } from './shared.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Review } from '../interfaces/Review';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sharedService:SharedService, private spinner:NgxSpinnerService) { }
 
-  baseUrl = "http://localhost:8080/api/products";
+  baseUrl =`${this.sharedService.baseUrl}/api/products`;
   categoryMap=new Map<string,string[]>();
   categories = [
     "beauty",
@@ -59,14 +62,21 @@ export class ProductService {
     return this.categoryMap;
   }
   getAllProducts = () => {
+    this.spinner.show();
     const headers = new HttpHeaders({
       'Authorization': "Bearer " + sessionStorage.getItem("access-token")
     });
     return this.http.get(`${this.baseUrl}/get`);
   }
 
+  getProductsByPage=(pageNo:number)=>{
+    this.spinner.show();
+    return this.http.get(`${this.baseUrl}/products/${pageNo}`);
+  }
+
 
   getProductById=(id:number)=>{
+    this.spinner.show()
     return this.http.get(`${this.baseUrl}/product/${id}`);
   }
 
@@ -110,5 +120,10 @@ export class ProductService {
       },
       error: err => console.log(err)
     });
+  }
+
+  addReview=(review:Review,productId:number)=>{
+    this.spinner.show();
+    return this.http.post(`${this.sharedService.baseUrl}/api/reviews/add/${productId}`,review);
   }
 }

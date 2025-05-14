@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
   selector: 'app-review',
@@ -11,7 +13,7 @@ import { Component, Input } from '@angular/core';
         <p class="bi bi-star-fill"></p>
       </div>
       <p id="text">{{reviews.length}} ratings and {{reviews.length}} reviews</p>
-      <button class="btn btn-primary">Rate Product</button>
+      <button (click)="sharedService.toAdd.next(true)" class="btn btn-primary">Rate Product</button>
     </div>
     <p style="font-family: 'Inter';font-size:1.1rem; font-weight:bold;">Customer Reviews:</p>
     <div id="review-section" style="height: 14vh; width:100%">
@@ -114,5 +116,9 @@ import { Component, Input } from '@angular/core';
 export class ReviewComponent {
 
   @Input() reviews: any;
+
+  constructor(public sharedService:SharedService){}
+
+
 
 }

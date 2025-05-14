@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/service/shared.service';
 import { WishlistService } from 'src/app/service/wishlist.service';
@@ -75,7 +76,7 @@ export class ProductItemComponent {
   toggle:boolean=false;
 
   constructor(public sharedService:SharedService, private wishlistService:WishlistService,
-    private toastr:ToastrService,private router:Router
+    private toastr:ToastrService,private router:Router, private spinner:NgxSpinnerService
   ){}
 
 
@@ -91,7 +92,8 @@ addToWishList(productId:number){
     },
     error:(err:any)=>{
       this.toastr.error(err.error.message);
-    }
+    },
+    complete:()=>this.spinner.hide()
   })
 }
 

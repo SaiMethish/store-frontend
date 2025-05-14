@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponse, Login, Register } from '../interfaces/Auth';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { SharedService } from './shared.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +16,19 @@ export class AuthService {
     this.loggedIn.next(status);
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private sharedService:SharedService, private spinner:NgxSpinnerService) {}
 
   isRefresh = new BehaviorSubject<boolean>(false);
 
-  baseUrl = "http://localhost:8080";
+  baseUrl = this.sharedService.baseUrl;
 
   registerApi = (registerObj: Register) => {
+    this.spinner.show();
     return this.http.post<AuthResponse>(this.baseUrl + "/register", registerObj);
   };
 
   loginApi = (loginObj: Login) => {
+    this.spinner.show();
     return this.http.post<AuthResponse>(this.baseUrl + "/login", loginObj);
   };
 

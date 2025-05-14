@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/service/product.service';
 import { SharedService } from 'src/app/service/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from 'src/app/service/wishlist.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-page',
@@ -12,15 +13,17 @@ import { WishlistService } from 'src/app/service/wishlist.service';
   styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent implements OnInit,AfterViewInit {
-  constructor(private route:ActivatedRoute, private sharedService:SharedService,
+  constructor(private route:ActivatedRoute, public sharedService:SharedService,
     private renderer:Renderer2, private cartService:CartService, private toastr:ToastrService,
-  private wishlistService:WishlistService){}
+  private wishlistService:WishlistService, private spinner:NgxSpinnerService){}
   product:any;
+
   @ViewChild('productStatus') productStatus!:ElementRef;
 
   ngOnInit(){
     this.route.data.subscribe((i:any)=>{
       this.product=i.product;
+      this.spinner.hide();
     })    
   }
   ngAfterViewInit(): void {
@@ -55,11 +58,15 @@ export class ProductPageComponent implements OnInit,AfterViewInit {
           },
           error:(err:any)=>{
             console.error(err);
-          }
+          },
+          complete:()=>this.spinner.hide()
         })
       },
       error:(err:any)=>{
         console.error(err);
+      },
+      complete:()=>{
+        this.spinner.hide();
       }
     })
   }
@@ -73,7 +80,8 @@ export class ProductPageComponent implements OnInit,AfterViewInit {
       error:(err:any)=>{
         console.error(err);
         this.toastr.error(err.message);
-      }
+      },
+      complete:()=>this.spinner.hide()
     })
   }
 

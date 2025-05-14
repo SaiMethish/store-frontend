@@ -2,20 +2,29 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Order } from '../interfaces/Purchase';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  constructor(private http:HttpClient) { }
+  //baseUrl="https://ecommerce-d24x.onrender.com";
+  baseUrl="http://localhost:8080"
 
+  constructor(private http:HttpClient, private spinner:NgxSpinnerService) { }
+  
   userCart=new BehaviorSubject([]);
   $userCart=this.userCart.asObservable();
+
+  spinnerFlag=new BehaviorSubject(false);
 
   searchText = new BehaviorSubject('');
   categoryFlag=new BehaviorSubject(false);
   categoryName=new BehaviorSubject('');
+
+
+  toAdd=new BehaviorSubject(false);
 
   setUserCart=(cart:any)=>{
     this.userCart.next(cart);
@@ -26,15 +35,18 @@ export class SharedService {
   }
 
   checkout=(purchase:Order)=>{
-    return this.http.post(`http://localhost:8080/api/checkout/purchase`,purchase);
+    this.spinner.show();
+    return this.http.post(`${this.baseUrl}/api/checkout/purchase`,purchase);
   }
 
   placeOrder=(total_price:number)=>{
-    return this.http.post(`http://localhost:8080/payment?amount=${total_price}&currency=INR`,null);
+    this.spinner.show();
+    return this.http.post(`${this.baseUrl}/payment?amount=${total_price}&currency=INR`,null);
   }
 
   getOrderList=()=>{
-    return this.http.get(`http://localhost:8080/api/checkout/getOrders`);
+    this.spinner.show();
+    return this.http.get(`${this.baseUrl}/api/checkout/getOrders`);
   }
 
 }

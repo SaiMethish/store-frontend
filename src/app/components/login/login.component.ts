@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import {AuthResponse, Login} from "../../interfaces/Auth"
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,9 @@ import {AuthResponse, Login} from "../../interfaces/Auth"
 export class LoginComponent {
   loginForm!: FormGroup;
   isLoggedIn:boolean=false;
-  constructor(private fb: FormBuilder, private authService: AuthService,  private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService,  private router: Router,
+    private spinner:NgxSpinnerService
+  ) {
     this.loginForm = fb.group({
       email: [""],
       password: [""]
@@ -49,7 +52,8 @@ export class LoginComponent {
       },
       error:(err:any)=>{
         console.log(err);
-      }
+      },
+      complete:()=>this.spinner.hide()
     })
   }
 }

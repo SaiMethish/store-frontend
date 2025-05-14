@@ -1,5 +1,6 @@
 import { Component, OnInit, QueryList, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/service/cart.service';
 import { SharedService } from 'src/app/service/shared.service';
@@ -12,7 +13,7 @@ import { WishlistService } from 'src/app/service/wishlist.service';
 })
 export class CartComponent implements OnInit {
   constructor(private cartService: CartService, public sharedService: SharedService, private toastr: ToastrService,
-    public router:Router
+    public router:Router, public spinner:NgxSpinnerService
   ) { }
   userCart!: any;
   totalPrice = 0;
@@ -23,8 +24,9 @@ export class CartComponent implements OnInit {
         this.userCart = res.cartItems;
         this.totalPrice = res.totalPrice;
         console.log(res);
+        this.spinner.hide();
       },
-      error: (err: any) => { console.log(err) }
+      error: (err: any) => { console.log(err); this.spinner.hide() }
     });
   }
   clearCart() {
@@ -40,6 +42,9 @@ export class CartComponent implements OnInit {
       },
       error: (err: any) => {
         console.log(err);
+      },
+      complete:()=>{
+        this.spinner.hide();
       }
     })
   }
@@ -53,7 +58,8 @@ export class CartComponent implements OnInit {
           this.toastr.success("cart item removed");
           window.location.reload();
         },
-        error: (err: any) => console.log(err)
+        error: (err: any) => console.log(err),
+        complete:()=>{this.spinner.hide()}
       })
       return;
     }
@@ -63,7 +69,8 @@ export class CartComponent implements OnInit {
         this.toastr.success("cart updated");
         window.location.reload();
       },
-      error: (err: any) => console.log(err)
+      error: (err: any) => console.log(err),
+      complete:()=>{this.spinner.hide()}
     })
   }
 

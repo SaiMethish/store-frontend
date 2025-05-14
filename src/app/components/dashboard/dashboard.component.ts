@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/service/auth.service';
 import { CartService } from 'src/app/service/cart.service';
@@ -14,17 +15,18 @@ import { WishlistService } from 'src/app/service/wishlist.service';
 })
 export class DashboardComponent implements OnInit {
   constructor(private sharedService: SharedService, private cartService: CartService,
-    private wishlistService:WishlistService, private toastr:ToastrService, 
-    private router:Router
+    private spinner:NgxSpinnerService
   ) { }
   ngOnInit(): void {
+    //this.productService.populateData();
     this.cartService.getCart().subscribe({
       next: (res: any) => {
         this.sharedService.setUserCart(res.cartItems);
       },
       error: (err: any) => {
         console.error(err);
-      }
+      },
+      //complete:()=>this.spinner.hide()
     })
   }
 

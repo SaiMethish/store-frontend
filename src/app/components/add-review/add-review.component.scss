@@ -1,0 +1,62 @@
+.add-review-container {
+    display: flex;
+    height: 35vh;
+    width: 80%;
+    flex-direction: column;
+    font-family: "Poppins";
+
+    .star-container {
+        display: flex;
+        gap: 5px; /* Adds spacing between stars */
+        cursor: pointer; /* Makes the stars clickable */
+
+        .bi {
+            font-size: 24px; /* Sets the size of the stars */
+            color: #ccc; /* Default color for unselected stars */
+            transition: color 0.3s ease; /* Smooth transition for color change */
+        }
+
+        .bi-star-fill {
+            color: #f5c518; /* Highlight color for selected stars */
+        }
+    }
+
+    textarea {
+        margin-top: 1%;
+        width: 100%; /* Ensures it spans the full width of its container */
+        max-width: 500px; /* Optional: Limits the maximum width */
+        height: 150px; /* Sets a reasonable default height */
+        padding: 10px; /* Adds spacing inside the textarea */
+        font-size: 16px; /* Ensures text is readable */
+        line-height: 1.5; /* Improves readability of multiline text */
+        border: 1px solid #ccc; /* Adds a subtle border */
+        border-radius: 5px; /* Rounds the corners */
+        background-color: #f9f9f9; /* Light background for contrast */
+        color: #333; /* Dark text for readability */
+        resize: none; /* Disables resizing */
+        outline: none; /* Removes the default focus outline */
+        box-shadow: none; /* Removes any default browser styling */
+        transition: border-color 0.3s, box-shadow 0.3s; /* Adds a smooth transition */
+    }
+
+    textarea:focus {
+        border-color: #007BFF; /* Changes border color on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a glow effect */
+        background-color: #fff; /* Optional: Highlights the background */
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        margin-top: 2%;
+        justify-content: space-between;
+
+        * {
+            width: 40%;
+            margin-left: 2%;
+            padding: 2% 1% 2% 1%;
+            font-family: "Poppins";
+            font-weight: bold;
+        }
+    }
+}

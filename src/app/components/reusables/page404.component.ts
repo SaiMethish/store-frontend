@@ -25,8 +25,12 @@ import { Component } from '@angular/core';
         font-size: 110px;
         line-height: 50px;
         letter-spacing: 4px;
+        // padding:1%;
+        // margin:1%;
     }
     p{
+      margin-top:5%;
+      padding:2%;
         font-size: 16px;
         font-weight: normal;
         font-family: "Poppins";

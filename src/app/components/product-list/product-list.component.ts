@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { Product } from 'src/app/interfaces/Product';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
@@ -14,12 +15,16 @@ export class ProductListComponent implements OnInit {
   p:number=1;
   searchVal!:string;
   searchbyCategoryFlag!:boolean;
-  constructor(private productService: ProductService, public sharedService:SharedService, public categoryService:CategoryService) {}
+  totalElements:number;
+  constructor(private productService: ProductService, public sharedService:SharedService, public categoryService:CategoryService, private spinner:NgxSpinnerService) {}
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((res:any) => {
-      this.productList = res;
-    });
+    this.spinner.show();
+    this.getproducts();
+    // this.productService.getAllProducts().subscribe((res:any) => {
+    //   this.productList = res;
+    //   this.spinner.hide();
+    // });
     this.sharedService.categoryName.subscribe((res)=>{
       if(res!=''){
         this.getByCategoryName(res);
@@ -36,13 +41,26 @@ export class ProductListComponent implements OnInit {
     })
   }
 
+  getproducts=()=>{
+    this.productService.getProductsByPage(this.p).subscribe(
+      (res:any)=>{
+        this.productList=res.content;
+        this.totalElements=res.totalElements;
+        this.spinner.hide();
+      }
+    )
+  }
+
   getByCategoryName=(val:string)=>{
+    this.spinner.show();
     this.categoryService.getProductByCategory(val).subscribe({
       next:(res:any)=>{
         this.productList=res;
+        this.spinner.hide();
       },
       error:(err:any)=>{
         console.log(err);
+        //this.spinner.hide();
       }
     })
   }

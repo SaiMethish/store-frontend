@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/service/cart.service';
 import { SharedService } from 'src/app/service/shared.service';
@@ -116,7 +117,7 @@ export class WishlistItemComponent {
 
   constructor(public sharedService: SharedService, private cartService: CartService,
     private wishlistService: WishlistService, private toastr: ToastrService,
-    private router: Router
+    private router: Router, private spinner:NgxSpinnerService
   ) { }
 
   deleteItem = (itemId: number) => {
@@ -131,7 +132,8 @@ export class WishlistItemComponent {
       error: (err: any) => {
         console.log(err.error);
         this.toastr.error(err.error.message);
-      }
+      },
+      complete:()=>this.spinner.hide()
     })
   }
   moveItem = (itemId: number) => {
@@ -145,7 +147,8 @@ export class WishlistItemComponent {
       error: (err: any) => {
         console.log(err);
         this.toastr.error(err.error.message);
-      }
+      },
+      complete:()=>this.spinner.hide()
     })
   }
 }

@@ -6,6 +6,7 @@ import { Customer,Order,OrderItem,Address } from 'src/app/interfaces/Purchase';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var Razorpay:any;
 
@@ -17,11 +18,11 @@ declare var Razorpay:any;
 export class CheckoutComponent implements OnInit {
   constructor(public sharedService:SharedService, private cartService:CartService,
     private fb:FormBuilder, private toastr:ToastrService, private http:HttpClient,
-  private router:Router){}
+  private router:Router, private spinner:NgxSpinnerService){}
   cart!:any[];
   billingForm!:FormGroup;
   totalPrice!:number;
-  totalQuantity!:number;
+  totalQuantity:number;
   ngOnInit() {
     this.billingForm=this.fb.group({
       firstName:[""],
@@ -37,6 +38,7 @@ export class CheckoutComponent implements OnInit {
 
     this.cartService.getCart().subscribe(
       (res:any)=>{
+        this.spinner.hide();
         this.cart=res.cartItems;
         this.totalPrice=res.totalPrice;
         this.totalQuantity=this.cart.reduce((total,i)=>{
@@ -44,8 +46,9 @@ export class CheckoutComponent implements OnInit {
         },0)
       },
       (err:any)=>{
+        this.spinner.hide();
         console.error(err);
-      }
+      },
     )
   }
 
@@ -57,7 +60,8 @@ export class CheckoutComponent implements OnInit {
           console.log(res);
           this.openModel(res);
         },
-        error:(err:any)=>{console.log(err)}
+        error:(err:any)=>{console.log(err)},
+        complete:()=>this.spinner.hide()
       })
     }
    else this.checkout("COD");
@@ -88,7 +92,8 @@ export class CheckoutComponent implements OnInit {
       },
       error:(err:any) =>{
         console.error(err);
-      }
+      },
+      complete:()=>this.spinner.hide()
     })
   }
 

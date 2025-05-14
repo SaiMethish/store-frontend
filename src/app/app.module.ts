@@ -30,6 +30,9 @@ import { WishlistItemComponent } from './components/reusables/wishlist-item.comp
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { MyordersComponent } from './components/myorders/myorders.component';
+import { LoadingComponent } from './components/reusables/loading.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { AddReviewComponent } from './components/add-review/add-review.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { MyordersComponent } from './components/myorders/myorders.component';
     CheckoutComponent,
     SearchPipe,
     MyordersComponent,
+    LoadingComponent,
+    AddReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,7 @@ import { MyordersComponent } from './components/myorders/myorders.component';
     ButtonModule,
     MenuModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     NgbModule,
     FormsModule,
     NgxPaginationModule,

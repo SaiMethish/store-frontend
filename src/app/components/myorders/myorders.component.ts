@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { SharedService } from 'src/app/service/shared.service';
   styleUrls: ['./myorders.component.scss']
 })
 export class MyordersComponent implements OnInit {
-  constructor(public sharedService:SharedService){}
+  constructor(public sharedService:SharedService, private spinner:NgxSpinnerService){}
   orderList:any=[];
 
   ngOnInit(): void {
@@ -18,7 +19,8 @@ export class MyordersComponent implements OnInit {
           i.dateCreated=new Date(i?.dateCreated).toDateString();
         })
       },
-      error:(err:any)=>console.error(err)
+      error:(err:any)=>console.error(err),
+      complete:()=>this.spinner.hide()
     })
   }
 }
