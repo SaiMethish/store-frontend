@@ -33,6 +33,8 @@ import { MyordersComponent } from './components/myorders/myorders.component';
 import { LoadingComponent } from './components/reusables/loading.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AddReviewComponent } from './components/add-review/add-review.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { AddReviewComponent } from './components/add-review/add-review.component
     MyordersComponent,
     LoadingComponent,
     AddReviewComponent,
+    ContactComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MyordersComponent } from './components/myorders/myorders.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -59,6 +61,14 @@ const routes: Routes = [
   {
     path:"myorder",
     component:MyordersComponent
+  },
+  {
+    path:"about",
+    component:AboutComponent
+  },
+  {
+    path:"contact",
+    component:ContactComponent
   },
   {
       path:'**',

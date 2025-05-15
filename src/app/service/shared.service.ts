@@ -9,8 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class SharedService {
 
-  //baseUrl="https://ecommerce-d24x.onrender.com";
-  baseUrl="http://localhost:8080"
+  baseUrl="https://ecommerce-d24x.onrender.com";
+  // baseUrl="http://localhost:8080"
 
   constructor(private http:HttpClient, private spinner:NgxSpinnerService) { }
   

@@ -80,6 +80,9 @@ export class NavbarComponent implements OnInit, AfterViewChecked {
   }
   inputHandler = () => {
     this.sharedService.searchText.next(this.searchinputVal);
+    if(this.authService.checkLoginStatus()){
+      this.router.navigate(['']);
+    }
   };
 
   debounceFn(fn: any, delay: any) {

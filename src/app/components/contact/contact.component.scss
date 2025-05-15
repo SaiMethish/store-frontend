@@ -1,0 +1,72 @@
+.contact-details {
+    //box-shadow: 10px solid gray;
+    width: 340px;
+    height: 257px;
+    margin-left: 3%;
+    margin-top: 7%;
+} 
+
+.contact-mobile {
+    padding: 3%;
+}
+
+.call-email-txt {
+    padding-left: 10px;
+    padding-top: 12px;
+    font-family: "Inter",sans-serif;
+    font-weight: 500;
+}
+.bottom-line {
+    border: 0.5px solid black;
+    opacity: 30%;
+    margin: 12px;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 3%;
+    height: 50%;
+}
+
+.contact-form {
+    width: 800px;
+    height: 257px;
+    margin-top: 8%;
+    margin-bottom: 3%;
+}
+
+input {
+    width: 235px;
+    height: 50px;
+    background-color: #F5F5F5;
+    border: none;
+    padding: 2%;
+    outline: none;
+    font-family: "Poppins";
+}
+
+::placeholder {
+    padding: 10px;
+    opacity: 40%;
+}
+
+textarea {
+    width: 750px;
+    height: 207px;
+    margin-left: 3%;
+    margin-top: 3%;
+    background-color: #F5F5F5;
+    border: none;
+    padding: 2%;
+    outline: none;
+    font-family: "Poppins";
+}
+
+.send-button {
+    margin-left: 70%;
+    margin-top: 3%;
+    width: 215px;
+    height: 56px;
+    border-radius: 4px;
+}

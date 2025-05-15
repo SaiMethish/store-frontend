@@ -1,0 +1,34 @@
+<div class="contact-container">
+    <div class="contact-details">
+        <div class="contact-mobile">
+            <div class="text-icon" style="display: flex;">
+                <img src="../../../assets/icons-phone.svg">
+                <p class="call-email-txt">Call To Us</p>
+            </div>
+            <p style="padding-top: 10px; font-family: 'Poppins';">We are available 24/7, 7 days a week.</p>
+            <p style="font-family: 'Poppins';">Phone: +8801611112222</p>
+        </div>
+        <div class="bottom-line"></div>
+        <div class="contact-mobile">
+            <div class="text-icon" style="display: flex;">
+                <img src="../../../assets/icons-mail.svg">
+                <p class="call-email-txt">Write To Us</p>
+            </div>
+            <p style="padding-top: 10px; font-family: 'Poppins';">Fill out our form and we will contact you within 24 hours.</p>
+            <p style="font-family: 'Poppins';">Email: customerexclusive.com</p>
+        </div>
+    </div>
+    <div class="contact-form">
+        <form [formGroup]="contactForm">
+            <div class="email-cnt" style="display: flex;justify-content: space-evenly;">
+                <input type="text" placeholder="Your Name" formControlName="name">
+                <input type="email" placeholder="Your Email" formControlName="email">
+                <input type="number" placeholder="Your Phone" formControlName="phone">
+            </div>
+            <textarea placeholder="Your Message" formControlName="message" style="resize: none;"></textarea>
+            <div>
+                <button type="submit" class="btn btn-danger send-button">Send Message</button>
+            </div>
+        </form>
+    </div>
+</div>
